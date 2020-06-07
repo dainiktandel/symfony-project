@@ -1,0 +1,38 @@
+
+{% extends('base.html.twig') %}
+
+{% block body %}
+  {# pass a string argument to get only the messages of that type #}
+  {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+  {% endfor %}
+
+  <h2> List of all post </h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>TITLE</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+      <tr>
+        <td>{{ post.id }}</td>
+        <td>
+          <a href="{{ path('post.show', {id: post.id}) }}">
+            {{ post.title }}
+          </a>
+        </td>
+        <td>
+          <a class="text-danger" href="{{ path('post.delete', {id: post.id}) }}" >
+            delete
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
